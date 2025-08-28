@@ -2,12 +2,43 @@
 
 #include "paddle.h"
 
-void Paddle::Draw() { DrawRectangle(x, y, width, height, color); }
+void Paddle::limitMovement() {
+  constexpr short int offset = 5;
+  constexpr short int screenHeightStart = 0;
+
+  if (position.y <= screenHeightStart + offset) {
+    position.y = screenHeightStart + offset;
+  }
+  if (position.y + (height + offset) >= (GetScreenHeight())) {
+    position.y = GetScreenHeight() - height - offset;
+  }
+}
+
+void Paddle::Draw() {
+  DrawRectangle(position.x, position.y, width, height, color);
+}
 
 void Paddle::Update() {
+
   if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
-    y -= speed;
-  } else if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
-    y += speed;
+    position.y -= speed;
   }
+
+  if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
+    position.y += speed;
+  }
+
+  limitMovement();
+}
+
+void CpuPaddle::Update(float &ballY) {
+
+  if (position.y + height / 2 > ballY) {
+    position.y -= speed;
+  }
+  if (position.y + height / 2 < ballY) {
+    position.y += speed;
+  }
+
+  limitMovement();
 }
