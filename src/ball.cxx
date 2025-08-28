@@ -11,6 +11,12 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
     randSpeed = GetRandomValue(-1, 1);
   }
 
+  int randPositionY = 0;
+
+  while (randPositionY == 0) {
+    randPositionY = GetRandomValue(2, (int)GetScreenHeight() - 2);
+  }
+
   position.x += speed.x;
   position.y += speed.y;
 
@@ -19,7 +25,7 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
   }
   if (position.x + radius >= GetScreenWidth()) {
     // speed.x *= -1;
-    position = (Vector2){GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f};
+    position = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
 
     if (player.isPlayer) {
       player.score++;
@@ -28,7 +34,7 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
   }
   if (position.x - radius <= 0) {
     // speed.x *= -1;
-    position = (Vector2){GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f};
+    position = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
     if (!cpu.isPlayer) {
       cpu.score++;
       speed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
