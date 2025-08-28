@@ -63,10 +63,11 @@ int main() {
     // Check for collision;
 
     if (CheckCollisionCircleRec(ball.position, ball.radius,
-                                Rectangle{player.position.x, player.position.y,
-                                          player.width, player.height})) {
+                                Rectangle{player.position.x - 10,
+                                          player.position.y, player.width + 10,
+                                          player.height})) {
       ball.speed.x *= -1;
-      player.speed += 0.5f;
+      player.speed += 0.8f;
       if (ball.speed.x < 0) {
         ball.speed.x -= speedAdd;
         ball.speed.y -= speedAdd;
