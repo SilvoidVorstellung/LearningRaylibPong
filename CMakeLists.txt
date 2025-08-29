@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.14)
-project(game)
+project(
+# --- PROJECT NAME ---
+game
+# --- ------------ ---
+VERSION 0.1
+DESCRIPTION "A simple pong game."
+LANGUAGES C CXX
+)
 
 find_package(raylib 5.5 REQUIRED)
 
