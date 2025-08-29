@@ -22,6 +22,12 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
 
   if (position.y + radius >= GetScreenHeight() || position.y - radius <= 0) {
     speed.y *= -1;
+
+    if (position.y > GetScreenHeight()) {
+      position.y += radius;
+    } else if (position.y < 0) {
+      position.y -= radius;
+    }
   }
   if (position.x + radius >= GetScreenWidth()) {
     // speed.x *= -1;
