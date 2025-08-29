@@ -24,7 +24,7 @@ int main() {
   player.width = 18;
   player.position.x = 10;
   player.position.y = (int)(screenHeight / 2) - (int)(player.height / 2);
-  player.speed = 8;
+  player.speed = 10;
   player.score = 0;
 
   CpuPaddle ai;
@@ -41,6 +41,7 @@ int main() {
 
   int randValue = GetRandomValue(-1, 1);
   unsigned int frameCounter = 0;
+  float offset = 5;
 
   SetTargetFPS(30);
 
@@ -63,10 +64,15 @@ int main() {
     // Check for collision;
 
     if (CheckCollisionCircleRec(ball.position, ball.radius,
-                                Rectangle{player.position.x - 10,
-                                          player.position.y, player.width + 10,
-                                          player.height})) {
+                                Rectangle{player.position.x,
+                                          player.position.y + 2, player.width,
+                                          player.height - 2})) {
       ball.speed.x *= -1;
+
+      if (ball.position.x < (player.position.x + player.width)) {
+        ball.position.x += player.width;
+      }
+
       player.speed += 0.8f;
       if (ball.speed.x < 0) {
         ball.speed.x -= speedAdd;
@@ -81,6 +87,11 @@ int main() {
             ball.position, ball.radius,
             Rectangle{ai.position.x, ai.position.y, ai.width, ai.height})) {
       ball.speed.x *= -1;
+
+      if (ball.position.x < ai.position.x) {
+        ball.position.x -= 2;
+      }
+
       if (ball.speed.x < 0) {
         ball.speed.x -= speedAdd;
         ball.speed.y -= speedAdd;
