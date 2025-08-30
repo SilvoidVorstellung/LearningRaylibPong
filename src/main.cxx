@@ -12,10 +12,19 @@ int main() {
 
   Ball ball;
 
-  ball.position = {(float)screenWidth / 2, (float)screenHeight / 2};
-  ball.radius = 10;
-  ball.color = WHITE;
-  ball.speed = (Vector2){7, 7};
+  float xMidScreen, yMidScreen, ballRadius;
+  Color ballColor;
+  Vector2 ballSpeed;
+  xMidScreen = (float)screenWidth / 2;
+  yMidScreen = (float)screenHeight / 2;
+  ballRadius = 10;
+  ballColor = WHITE;
+  ballSpeed = {7, 7};
+
+  ball.setPosition(xMidScreen, yMidScreen);
+  ball.setRadius(ballRadius);
+  ball.setColor(ballColor);
+  ball.setSpeed(ballSpeed.x, ballSpeed.y);
 
   Paddle player;
   player.isPlayer = true;
@@ -54,50 +63,54 @@ int main() {
       frameCounter = 0;
     }
 
+    Vector2 ballPosition = ball.getPosition();
+    Vector2 ballSpeed = ball.getSpeed();
+    float ballRadius = ball.getRadius();
+
     BeginDrawing();
     ClearBackground(DARKGREEN);
 
     ball.Update(player, ai, randValue);
     player.Update();
-    ai.Update(ball.position.y);
+    ai.Update(ballPosition.y);
 
     // Check for collision;
 
-    if (CheckCollisionCircleRec(ball.position, ball.radius,
+    if (CheckCollisionCircleRec(ballPosition, ballRadius,
                                 Rectangle{player.position.x,
                                           player.position.y + 2, player.width,
                                           player.height - 2})) {
-      ball.speed.x *= -1;
+      ballSpeed.x *= -1;
 
-      if (ball.position.x < (player.position.x + player.width)) {
-        ball.position.x += player.width;
+      if (ballPosition.x < (player.position.x + player.width)) {
+        ballPosition.x += player.width;
       }
 
       player.speed += 0.8f;
-      if (ball.speed.x < 0) {
-        ball.speed.x -= speedAdd;
-        ball.speed.y -= speedAdd;
-      } else if (ball.speed.x > 0) {
-        ball.speed.x += speedAdd;
-        ball.speed.y += speedAdd;
+      if (ballSpeed.x < 0) {
+        ballSpeed.x -= speedAdd;
+        ballSpeed.y -= speedAdd;
+      } else if (ballSpeed.x > 0) {
+        ballSpeed.x += speedAdd;
+        ballSpeed.y += speedAdd;
       }
     }
 
     if (CheckCollisionCircleRec(
-            ball.position, ball.radius,
+            ballPosition, ballRadius,
             Rectangle{ai.position.x, ai.position.y, ai.width, ai.height})) {
-      ball.speed.x *= -1;
+      ballSpeed.x *= -1;
 
-      if (ball.position.x < ai.position.x) {
-        ball.position.x -= 2;
+      if (ballPosition.x < ai.position.x) {
+        ballPosition.x -= 2;
       }
 
-      if (ball.speed.x < 0) {
-        ball.speed.x -= speedAdd;
-        ball.speed.y -= speedAdd;
-      } else if (ball.speed.x > 0) {
-        ball.speed.x += speedAdd;
-        ball.speed.y += speedAdd;
+      if (ballSpeed.x < 0) {
+        ballSpeed.x -= speedAdd;
+        ballSpeed.y -= speedAdd;
+      } else if (ballSpeed.x > 0) {
+        ballSpeed.x += speedAdd;
+        ballSpeed.y += speedAdd;
       }
     }
 
