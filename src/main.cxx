@@ -1,7 +1,7 @@
 #include "raylib.h"
 
-#include "ball.h"
-#include "paddle.h"
+#include "../include/ball.h"
+#include "../include/paddle.h"
 
 int main() {
 

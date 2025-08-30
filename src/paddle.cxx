@@ -1,6 +1,6 @@
 #include "raylib.h"
 
-#include "paddle.h"
+#include "../include/paddle.h"
 
 void Paddle::limitMovement() {
   constexpr short int offset = 5;
