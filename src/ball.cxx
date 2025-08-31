@@ -3,7 +3,28 @@
 #include "ball.h"
 #include "paddle.h"
 
+<<<<<<< HEAD
 void Ball::Draw() { DrawCircleV(position, radius, color); }
+=======
+Ball::Ball() {
+  mColor = WHITE;
+  mPosition = {1, 1};
+  mSpeed = {1, 1};
+  mRadius = 1.0f;
+}
+
+void Ball::setPosition(float &positionX, float &positionY) {
+  mPosition = {positionX, positionY};
+}
+void Ball::setRadius(float &radius) { mRadius = radius; }
+void Ball::setColor(Color &color) { mColor = color; }
+
+Vector2 &Ball::getPosition() { return mPosition; }
+Vector2 Ball::getSpeed() { return mSpeed; }
+float Ball::getRadius() { return mRadius; }
+
+void Ball::Draw() { DrawCircleV(mPosition, mRadius, mColor); }
+>>>>>>> 49ce48f (Didn't remembered.)
 
 void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
 

@@ -54,23 +54,41 @@ int main() {
       frameCounter = 0;
     }
 
+<<<<<<< HEAD
+=======
+    Vector2 ballSpeed = ball.getSpeed();
+
+>>>>>>> 49ce48f (Didn't remembered.)
     BeginDrawing();
     ClearBackground(DARKGREEN);
 
     ball.Update(player, ai, randValue);
     player.Update();
+<<<<<<< HEAD
     ai.Update(ball.position.y);
 
     // Check for collision;
 
     if (CheckCollisionCircleRec(ball.position, ball.radius,
+=======
+    ai.Update(ball.getPosition().y);
+
+    // Check for collision;
+
+    if (CheckCollisionCircleRec(ball.getPosition(), ball.getRadius(),
+>>>>>>> 49ce48f (Didn't remembered.)
                                 Rectangle{player.position.x,
                                           player.position.y + 2, player.width,
                                           player.height - 2})) {
       ball.speed.x *= -1;
 
+<<<<<<< HEAD
       if (ball.position.x < (player.position.x + player.width)) {
         ball.position.x += player.width;
+=======
+      if (ball.getPosition().x < (player.position.x + player.width)) {
+        ball.getPosition().x += player.width;
+>>>>>>> 49ce48f (Didn't remembered.)
       }
 
       player.speed += 0.8f;
@@ -84,12 +102,21 @@ int main() {
     }
 
     if (CheckCollisionCircleRec(
+<<<<<<< HEAD
             ball.position, ball.radius,
+=======
+            ball.getPosition(), ballRadius,
+>>>>>>> 49ce48f (Didn't remembered.)
             Rectangle{ai.position.x, ai.position.y, ai.width, ai.height})) {
       ball.speed.x *= -1;
 
+<<<<<<< HEAD
       if (ball.position.x < ai.position.x) {
         ball.position.x -= 2;
+=======
+      if (ball.getPosition().x < ai.position.x) {
+        ball.getPosition().x -= 2;
+>>>>>>> 49ce48f (Didn't remembered.)
       }
 
       if (ball.speed.x < 0) {
