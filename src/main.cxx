@@ -69,7 +69,7 @@ int main() {
                                 Rectangle{player.position.x,
                                           player.position.y + 2, player.width,
                                           player.height - 2})) {
-      ball.getPosition().x *= -1;
+      ball.getSpeed().x *= -1;
 
       if (ball.getPosition().x < (player.position.x + player.width)) {
         ball.getPosition().x += player.width;

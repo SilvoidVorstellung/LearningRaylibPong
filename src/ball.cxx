@@ -50,19 +50,19 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
   }
   if (mPosition.x + mRadius >= GetScreenWidth()) {
     // mSpeed.x *= -1;
-    mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
 
     if (player.isPlayer) {
       player.score++;
       mSpeed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
+      mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
     }
   }
-  if (mPosition.x - mRadius <= 0) {
+  if (mPosition.x + mRadius <= 0) {
     // mSpeed.x *= -1;
-    mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
     if (!cpu.isPlayer) {
       cpu.score++;
       mSpeed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
+      mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
     }
   }
 }
