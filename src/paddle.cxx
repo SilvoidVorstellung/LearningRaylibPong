@@ -15,7 +15,8 @@ void Paddle::limitMovement() {
 }
 
 void Paddle::Draw() {
-  DrawRectangle(position.x, position.y, width, height, color);
+  DrawRectangleRounded(Rectangle{position.x, position.y, width, height}, 0.8, 0,
+                       color);
 }
 
 void Paddle::Update() {

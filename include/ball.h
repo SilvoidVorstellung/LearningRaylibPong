@@ -20,6 +20,6 @@ public:
   void setColor(Color color);
 
   void Draw();
-  void Update(Paddle &player, Paddle &cpu, int &randSpeed);
+  void Update(Paddle &player, Paddle &cpu);
   void Reset();
 };

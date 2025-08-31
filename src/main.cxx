@@ -10,13 +10,18 @@ int main() {
 
   InitWindow(screenWidth, screenHeight, "game");
 
+  Color green = Color{38, 185, 154, 255};
+  Color darkGreen = Color{20, 160, 133, 255};
+  Color lightGreen = Color{129, 204, 184, 255};
+  Color yellow = Color{243, 213, 91, 255};
+
   Ball ball;
   Vector2 ballPosition;
   ballPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
 
   ball.position = {ballPosition.x, ballPosition.y};
   ball.radius = 10.f;
-  ball.setColor(WHITE);
+  ball.setColor(yellow);
   ball.speed = {7, 7};
 
   Paddle player;
@@ -57,9 +62,12 @@ int main() {
     }
 
     BeginDrawing();
-    ClearBackground(DARKGREEN);
+    ClearBackground(darkGreen);
+    DrawRectangle(screenWidth / 2, 0, screenWidth / 2, screenHeight, green);
+    DrawCircle(screenWidth / 2, screenHeight / 2, 100, lightGreen);
+    DrawLine(screenWidth / 2, 0, screenWidth / 2, screenHeight, WHITE);
 
-    ball.Update(player, ai, randValue);
+    ball.Update(player, ai);
     player.Update();
     ai.Update(ball.position.y);
 
@@ -102,8 +110,6 @@ int main() {
         ball.speed.y += speedAdd;
       }
     }
-
-    DrawLine(screenWidth / 2, 0, screenWidth / 2, screenHeight, WHITE);
 
     player.Draw();
     ai.Draw();

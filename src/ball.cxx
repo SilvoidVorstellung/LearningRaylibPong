@@ -14,11 +14,7 @@ void Ball::setColor(Color color) { mColor = color; }
 
 void Ball::Draw() { DrawCircleV(position, radius, mColor); }
 
-void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
-
-  while (randSpeed == 0) {
-    randSpeed = GetRandomValue(-1, 1);
-  }
+void Ball::Update(Paddle &player, Paddle &cpu) {
 
   position.x += speed.x;
   position.y += speed.y;
@@ -37,7 +33,6 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
 
     if (player.isPlayer) {
       player.score++;
-      speed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
       Reset();
     }
   }
@@ -45,7 +40,6 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
     // speed.x *= -1;
     if (!cpu.isPlayer) {
       cpu.score++;
-      speed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
       Reset();
     }
   }
@@ -53,6 +47,12 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
 
 void Ball::Reset() {
   float randPositionY = GetRandomValue(1.0f, GetScreenHeight() - 1.0f);
+  int speedChoice[2] = {-1, 1};
+
+  speed = {7, 7};
+
+  speed.x *= speedChoice[GetRandomValue(0, 1)];
+  speed.y *= speedChoice[GetRandomValue(0, 1)];
 
   position.x = (float)GetScreenWidth() / 2;
   position.y = randPositionY;
