@@ -3,9 +3,6 @@
 #include "ball.h"
 #include "paddle.h"
 
-<<<<<<< HEAD
-void Ball::Draw() { DrawCircleV(position, radius, color); }
-=======
 Ball::Ball() {
   mColor = WHITE;
   mPosition = {1, 1};
@@ -13,18 +10,18 @@ Ball::Ball() {
   mRadius = 1.0f;
 }
 
-void Ball::setPosition(float &positionX, float &positionY) {
+void Ball::setPosition(float positionX, float positionY) {
   mPosition = {positionX, positionY};
 }
-void Ball::setRadius(float &radius) { mRadius = radius; }
-void Ball::setColor(Color &color) { mColor = color; }
+void Ball::setRadius(float radius) { mRadius = radius; }
+void Ball::setColor(Color color) { mColor = color; }
+void Ball::setSpeed(Vector2 speed) { mSpeed = speed; }
 
 Vector2 &Ball::getPosition() { return mPosition; }
-Vector2 Ball::getSpeed() { return mSpeed; }
-float Ball::getRadius() { return mRadius; }
+Vector2 &Ball::getSpeed() { return mSpeed; }
+float &Ball::getRadius() { return mRadius; }
 
 void Ball::Draw() { DrawCircleV(mPosition, mRadius, mColor); }
->>>>>>> 49ce48f (Didn't remembered.)
 
 void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
 
@@ -38,33 +35,34 @@ void Ball::Update(Paddle &player, Paddle &cpu, int &randSpeed) {
     randPositionY = GetRandomValue(2, (int)GetScreenHeight() - 2);
   }
 
-  position.x += speed.x;
-  position.y += speed.y;
+  mPosition.x += mSpeed.x;
+  mPosition.y += mSpeed.y;
 
-  if (position.y + radius >= GetScreenHeight() || position.y - radius <= 0) {
-    speed.y *= -1;
+  if (mPosition.y + mRadius >= GetScreenHeight() ||
+      mPosition.y - mRadius <= 0) {
+    mSpeed.y *= -1;
 
-    if (position.y > GetScreenHeight()) {
-      position.y += radius;
-    } else if (position.y < 0) {
-      position.y -= radius;
+    if (mPosition.y > GetScreenHeight()) {
+      mPosition.y += mRadius;
+    } else if (mPosition.y < 0) {
+      mPosition.y -= mRadius;
     }
   }
-  if (position.x + radius >= GetScreenWidth()) {
-    // speed.x *= -1;
-    position = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
+  if (mPosition.x + mRadius >= GetScreenWidth()) {
+    // mSpeed.x *= -1;
+    mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
 
     if (player.isPlayer) {
       player.score++;
-      speed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
+      mSpeed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
     }
   }
-  if (position.x - radius <= 0) {
-    // speed.x *= -1;
-    position = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
+  if (mPosition.x - mRadius <= 0) {
+    // mSpeed.x *= -1;
+    mPosition = (Vector2){GetScreenWidth() / 2.0f, (float)randPositionY};
     if (!cpu.isPlayer) {
       cpu.score++;
-      speed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
+      mSpeed = (Vector2){(float)8 * randSpeed, (float)8 * randSpeed};
     }
   }
 }

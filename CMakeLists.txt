@@ -6,6 +6,8 @@ DESCRIPTION "A simple pong game."
 LANGUAGES C CXX
 )
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 find_package(raylib 5.5 REQUIRED)
 
 file(GLOB_RECURSE SRC
