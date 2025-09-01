@@ -2,6 +2,8 @@
 
 #include "paddle.h"
 
+Paddle::Paddle() : speed(5), color(WHITE), score(0), height(100), width(18) {}
+
 void Paddle::limitMovement() {
   constexpr short int offset = 5;
   constexpr short int screenHeightStart = 0;

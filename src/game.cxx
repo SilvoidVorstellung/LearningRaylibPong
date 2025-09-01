@@ -1,6 +1,7 @@
 #include <raylib.h>
 
 #include "ball.h"
+#include "colors.h"
 #include "game.h"
 #include "paddle.h"
 
@@ -11,39 +12,22 @@ void game() {
 
   InitWindow(screenWidth, screenHeight, "game");
 
-  Color green = Color{38, 185, 154, 255};
-  Color darkGreen = Color{20, 160, 133, 255};
-  Color lightGreen = Color{129, 204, 184, 255};
-  Color yellow = Color{243, 213, 91, 255};
-
   Ball ball;
   Vector2 ballPosition;
   ballPosition = {(float)screenWidth / 2, (float)screenHeight / 2};
 
   ball.position = {ballPosition.x, ballPosition.y};
-  ball.radius = 10.f;
-  ball.setColor(yellow);
-  ball.speed = {7, 7};
 
   Paddle player;
   player.isPlayer = true;
-  player.color = WHITE;
-  player.height = 100;
-  player.width = 18;
   player.position.x = 10;
   player.position.y = (int)(screenHeight / 2) - (int)(player.height / 2);
-  player.speed = 10;
-  player.score = 0;
 
   CpuPaddle ai;
   ai.isPlayer = false;
-  ai.color = WHITE;
-  ai.height = 100;
-  ai.width = 18;
   ai.position.x = GetRenderWidth() - ai.width - 10;
   ai.position.y = (int)(screenHeight / 2) - (int)(ai.height / 2);
-  ai.speed = 8;
-  ai.score = 0;
+  ai.speed = 5;
 
   constexpr float speedAdd{0.5f};
 
@@ -51,7 +35,7 @@ void game() {
   unsigned int frameCounter = 0;
   float offset = 5;
 
-  SetTargetFPS(30);
+  SetTargetFPS(60);
 
   while (!WindowShouldClose()) {
 

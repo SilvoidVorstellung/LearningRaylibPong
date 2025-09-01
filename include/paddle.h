@@ -21,6 +21,8 @@ public:
 
   void Draw();
   void Update();
+
+  Paddle();
 };
 
 class CpuPaddle : public Paddle {

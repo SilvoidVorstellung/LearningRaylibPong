@@ -1,14 +1,10 @@
 #include <raylib.h>
 
 #include "ball.h"
+#include "colors.h"
 #include "paddle.h"
 
-Ball::Ball() {
-  mColor = WHITE;
-  position = {1, 1};
-  speed = {1, 1};
-  radius = 1.0f;
-}
+Ball::Ball() : speed({4, 4}), radius(10), mColor(yellow) {}
 
 void Ball::setColor(Color color) { mColor = color; }
 
