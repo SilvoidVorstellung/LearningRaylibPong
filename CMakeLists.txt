@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 project(
-game
+pong
 VERSION 0.1
 DESCRIPTION "A simple pong game."
 LANGUAGES C CXX
@@ -8,7 +8,20 @@ LANGUAGES C CXX
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(raylib 5.5 REQUIRED)
+find_package(raylib 5.5 QUIET)
+
+if(NOT raylib_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+  )
+  FetchContent_GetProperties(raylib)
+  if(NOT raylib_POPULATED)
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_MakeAvailable(raylib)
+  endif()
+endif()
 
 file(GLOB_RECURSE SRC
 "src/*.cxx"
