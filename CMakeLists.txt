@@ -12,14 +12,16 @@ find_package(raylib 5.5 QUIET)
 
 if(NOT raylib_FOUND)
   include(FetchContent)
-  FetchContent_Declare(
+  fetchcontent_declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_PROGRESS true
+    GIT_TAG "master"
   )
-  FetchContent_GetProperties(raylib)
+  fetchcontent_getproperties(raylib)
   if(NOT raylib_POPULATED)
     set(FETCHCONTENT_QUIET NO)
-    FetchContent_MakeAvailable(raylib)
+    fetchcontent_makeavailable(raylib)
   endif()
 endif()
 
